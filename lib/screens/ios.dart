@@ -1,8 +1,8 @@
 import 'package:count_app/screens/counter.dart';
 import 'package:count_app/screens/main.dart';
+import 'package:count_app/screens/web_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class IosPage extends StatefulWidget {
   const IosPage({Key? key}) : super(key: key);
@@ -12,16 +12,7 @@ class IosPage extends StatefulWidget {
 }
 
 class _IosPageState extends State<IosPage> {
-  late final WebViewController controller;
   int _selectedIndex = 1;
-  @override
-  void initState() {
-    super.initState();
-    controller = WebViewController()
-      ..loadRequest(
-        Uri.parse('https://shampuriko.ru/about/'),
-      );
-  }
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -38,7 +29,7 @@ class _IosPageState extends State<IosPage> {
         page = CounterPage(theme:'cuppertino');
         break;
       case 2:
-        page = WebViewWidget(controller: controller);
+        page = WebViewPage();
         break;
       default:
         throw UnimplementedError('нет виджета');
@@ -77,10 +68,12 @@ class _IosPageState extends State<IosPage> {
           currentIndex: _selectedIndex,
         ), 
         tabBuilder: (context, index) {
-          return CupertinoTabView(
+          return SafeArea(
+            child:CupertinoTabView(
               builder: (context) {
                 return page;
               },
+            )
           );
         }
       ),

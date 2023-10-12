@@ -1,7 +1,7 @@
 import 'package:count_app/screens/counter.dart';
 import 'package:count_app/screens/main.dart';
+import 'package:count_app/screens/web_view.dart';
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class AndroidPage extends StatefulWidget {
   const AndroidPage({Key? key}) : super(key: key);
@@ -11,17 +11,7 @@ class AndroidPage extends StatefulWidget {
 }
 
 class _AndroidPageState extends State<AndroidPage> {
-  late final WebViewController controller;
   int _selectedIndex = 1;
-  @override
-  void initState() {
-    super.initState();
-    controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(
-        Uri.parse('https://shampuriko.ru/about/'),
-      );
-  }
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -38,7 +28,7 @@ class _AndroidPageState extends State<AndroidPage> {
         page = CounterPage(theme:'material');
         break;
       case 2:
-        page = WebViewWidget(controller: controller);
+        page = WebViewPage();
         break;
       default:
         throw UnimplementedError('нет виджета');
