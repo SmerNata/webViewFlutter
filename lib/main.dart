@@ -26,12 +26,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-  /*MaterialApp(
-        title: 'Название приложения',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
-        ),
-        home: MainPage(),
-      );
-  }*/
